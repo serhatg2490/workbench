@@ -61,5 +61,4 @@ docs/                design notes, one per module
 1. Add the header as `include/workbench/<module>.hpp`, inside `namespace workbench`.
 2. Add the tests as `tests/<module>_test.cpp`.
 3. Register the tests by adding `workbench_add_test(<module>)` to `tests/CMakeLists.txt`.
-4. Write down the design decisions in `docs/<module>.md`.
-5. Add a row to the module table above.
+4. Add a row to the module table above.
