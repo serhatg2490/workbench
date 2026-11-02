@@ -76,11 +76,15 @@ namespace workbench {
     public:
         using value_type = Char;
         using traits_type = Traits;
-        using iterator = const value_type*;
+        using const_pointer = const value_type*;
+        using const_iterator = const_pointer;
+        using iterator = const_iterator;  // same as const_iterator for a view
+        using const_reference = const value_type&;
         using size_type = std::size_t;
+        using difference_type = std::ptrdiff_t;
     private:
         // Beginning of the view
-        const value_type* data_;
+        const_pointer data_;
         // Number of characters starting from this position
         size_type size_;
     public:
@@ -89,12 +93,12 @@ namespace workbench {
         // Preconditions:
         // - If size > 0, data points to at least size valid elements.
         // - If size == 0, data may be nullptr or point to a valid position.
-        constexpr basic_string_view(const value_type* data, size_type size) noexcept : 
+        constexpr basic_string_view(const_pointer data, size_type size) noexcept : 
             data_(data), size_(size) {}
         // Preconditions:
         // - data points to a null-terminated valid string
         // - data is not nullptr
-        constexpr basic_string_view(const value_type* data) noexcept : data_(data),
+        constexpr basic_string_view(const_pointer data) noexcept : data_(data),
             size_(traits_type::length(data)) {}
 
         template <detail::string_like<traits_type> S>
@@ -103,7 +107,7 @@ namespace workbench {
 
         constexpr iterator begin() const noexcept { return data_; }
         constexpr iterator end() const noexcept { return (data_ == nullptr) ? data_ : data_ + size_; }
-        constexpr iterator data() const noexcept { return data_; }
+        constexpr const_pointer data() const noexcept { return data_; }
         constexpr size_type size() const noexcept { return size_; }
 
         // Precondition: n <= size_
@@ -119,7 +123,7 @@ namespace workbench {
         }
 
         // Precondition: pos < size_
-        constexpr const value_type& operator[](size_type pos) const noexcept {
+        constexpr const_reference operator[](size_type pos) const noexcept {
             return data_[pos];
         }
 
