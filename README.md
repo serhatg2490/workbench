@@ -10,9 +10,9 @@ Each module is a single header with its own test suite.
 
 ## Modules
 
-| Module | Header | Design notes | Standard counterpart |
+| Module | Header | Standard counterpart |
 |---|---|---|---|
-| `basic_string_view` | [`workbench/string_view.hpp`](include/workbench/string_view.hpp) | [docs/string_view.md](docs/string_view.md) | `std::basic_string_view` |
+| `basic_string_view` | [`workbench/string_view.hpp`](include/workbench/string_view.hpp) | `std::basic_string_view` |
 
 ## Requirements
 
